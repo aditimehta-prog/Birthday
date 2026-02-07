@@ -8,143 +8,161 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+:root{
+  --pink1:#ff5f9e;
+  --pink2:#ff0844;
+  --glass:rgba(255,255,255,.22);
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ff5f9e, #ff0844);
-    overflow: hidden;
-    color: #fff;
+*{box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(-45deg,var(--pink1),var(--pink2),#ff9acb);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+  overflow:hidden;
+  color:#fff;
 }
 
-/* Pages */
-.page {
-    display: none;
-    min-height: 100vh;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
+/* ================= PAGES ================= */
+.page{
+  display:none;
+  min-height:100vh;
+  padding:20px;
+  justify-content:center;
+  align-items:center;
+}
+.page.active{
+  display:flex;
+  animation:pageIn .8s ease;
 }
 
-.page.active {
-    display: flex;
-    animation: fadeIn 0.8s ease;
+/* ================= CARD ================= */
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+  border-radius:30px;
+  padding:40px;
+  max-width:820px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
 }
 
-/* Card */
-.card {
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(12px);
-    border-radius: 25px;
-    padding: 35px;
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 35px rgba(255,0,120,0.6);
+h1,h2,h3{
+  text-shadow:0 0 18px rgba(255,255,255,.6);
 }
 
-h1, h2, h3 {
-    text-shadow: 0 0 12px rgba(255,255,255,0.5);
+.name-glow{
+  font-size:2.4rem;
+  animation:glowPulse 2s infinite alternate;
 }
 
-p {
-    line-height: 1.7;
+/* ================= BUTTONS ================= */
+button{
+  margin:15px;
+  padding:14px 32px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(45deg,var(--pink2),var(--pink1));
+  color:#fff;
+  font-size:1rem;
+  cursor:pointer;
+  box-shadow:0 0 22px rgba(255,0,120,.7);
+  transition:.35s;
+}
+button:hover{
+  transform:translateY(-4px) scale(1.08);
+  box-shadow:0 0 40px rgba(255,0,120,.9);
 }
 
-/* Buttons */
-button {
-    margin: 15px;
-    padding: 12px 28px;
-    border: none;
-    border-radius: 30px;
-    background: linear-gradient(45deg, #ff0844, #ff5f9e);
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    box-shadow: 0 0 20px rgba(255,0,120,0.6);
+/* ================= INPUT ================= */
+input{
+  padding:14px;
+  width:85%;
+  max-width:420px;
+  border-radius:30px;
+  border:none;
+  margin-top:18px;
+  text-align:center;
 }
 
-button:hover {
-    transform: scale(1.08);
+/* ================= ENVELOPE ================= */
+#envelope{
+  display:none;
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:18px 36px;
+  background:#ff2f6d;
+  border-radius:50px;
+  cursor:pointer;
+  box-shadow:0 0 30px rgba(255,0,120,.9);
+  animation:bounce 1.4s infinite;
+  z-index:6;
 }
 
-/* Inputs */
-input {
-    padding: 12px;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 25px;
-    border: none;
-    margin-top: 15px;
-    text-align: center;
+/* ================= LETTER ================= */
+#letter{
+  display:none;
+  position:fixed;
+  inset:6%;
+  background:#fff;
+  color:#ff2f6d;
+  padding:36px;
+  border-radius:32px;
+  overflow-y:auto;
+  z-index:10;
+  animation:zoomIn .7s ease;
+}
+#letter img{
+  max-width:260px;
+  width:100%;
+  border-radius:18px;
+  margin:12px;
+}
+#letter i{
+  display:block;
+  margin:16px 0;
+  line-height:1.8;
 }
 
-/* Envelope */
-#envelope {
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 20px 30px;
-    background: #ff2f6d;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 0 30px rgba(255,0,120,0.8);
-    animation: bounce 1.4s infinite;
-    z-index: 5;
+/* ================= FLOATING HEARTS ================= */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  pointer-events:none;
+  animation:floatUp linear infinite;
 }
 
-/* Letter */
-#letter {
-    display: none;
-    position: fixed;
-    inset: 8%;
-    background: white;
-    color: #ff2f6d;
-    padding: 30px;
-    border-radius: 30px;
-    overflow-y: auto;
-    z-index: 10;
-    animation: zoomIn 0.8s ease;
+/* ================= ANIMATIONS ================= */
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(40px) scale(.95)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
-
-#letter i {
-    display: block;
-    margin-bottom: 15px;
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-10px)}
 }
-
-/* Floating hearts */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    animation: floatUp linear infinite;
-    pointer-events: none;
+@keyframes zoomIn{
+  from{opacity:0;transform:scale(.7)}
+  to{opacity:1;transform:scale(1)}
 }
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
 }
-
-@keyframes bounce {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-10px); }
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-
-@keyframes zoomIn {
-    from { transform: scale(0.6); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-120vh); opacity: 0; }
+@keyframes glowPulse{
+  from{text-shadow:0 0 12px #ff5fa2}
+  to{text-shadow:0 0 28px #fff,0 0 55px #ff5fa2}
 }
 </style>
 </head>
@@ -152,64 +170,58 @@ input {
 <body>
 
 <!-- PAGE 1 -->
-<div id="page1" class="page active">
+<div class="page active">
 <div class="card">
 <h1>WELCOME 💖 MERA BACCHA 💖</h1>
-<h2>There is a Quiz ❔ for You</h2>
-<button onclick="nextPage('page2')">Let's start 💫</button>
-<h3>Best of luck 🤞</h3>
+<h2>A tiny quiz before your surprise ❔</h2>
+<button onclick="go(1)">Let’s Start 💫</button>
 </div>
 </div>
 
 <!-- PAGE 2 -->
-<div id="page2" class="page">
+<div class="page">
 <div class="card">
-<h1>Q1. Where did we first meet 🫂?</h1>
-<button onclick="nextPage('page3')">Hostel Room</button>
-<button onclick="nextPage('page3')">Evening Attendance</button>
+<h1>Where did we first meet 🫂?</h1>
+<button onclick="go(2)">Hostel Room</button>
+<button onclick="go(2)">Evening Attendance</button>
 </div>
 </div>
 
 <!-- PAGE 3 -->
-<div id="page3" class="page">
+<div class="page">
 <div class="card">
-<h1>Q2. How many times we celebrated your birthday?</h1>
+<h1>How many birthdays we celebrated?</h1>
 <input type="number" placeholder="Enter count">
-<button onclick="nextPage('page4')">➡️</button>
+<button onclick="go(3)">Next ➡️</button>
 </div>
 </div>
 
 <!-- PAGE 4 -->
-<div id="page4" class="page">
+<div class="page">
 <div class="card">
-<h1>Q3. Which birthday you loved most?</h1>
-<input type="text" placeholder="Write from heart 💕">
-<h2>I have something special for you 😄</h2>
-<button onclick="nextPage('page5')">➡️</button>
+<h1>Your favorite birthday 💕</h1>
+<input type="text" placeholder="From heart…">
+<button onclick="go(4)">Reveal ➡️</button>
 </div>
 </div>
 
 <!-- PAGE 5 -->
-<div id="page5" class="page">
+<div class="page">
 <div class="card">
-<h2>HEY, keep smiling 😊</h2>
-<p><i>Happy Birthday to my forever favorite person 💖</i></p>
-<p> You make life brighter just by being in it, and I’m so grateful for every laugh, every rant, and every
-            memory we’ve shared. May this year bring you endless joy, crazy adventures, and all the love you deserve.
-            Stay the amazing soul you are—because the world (and I) wouldn’t be the same without you. 🌟
-        </p>
-<p>Thank you for being part of my life 🌟</p>
+<h2>Keep smiling 😊</h2>
+<p>Some surprises are waiting for you…</p>
 <button onclick="showEnvelope()">Open Your Gift 💌</button>
 </div>
 </div>
 
-<div id="envelope" onclick="openLetter()">THERE IS A SURPRISE 🎁</div>
+<div id="envelope" onclick="openLetter()">SURPRISE 🎁</div>
 
 <div id="letter">
-<h1>Happy Birthday 🎊 Meri Jaan</h1>
-        <b> Most Special Person In My life✨</b>
-        <img src="https://png.pngtree.com/png-clipart/20250116/original/pngtree-colorful-birthday-cake-with-candles-and-confetti-png-image_20274111.png">
-            <i>Riyoo, first of all I’m really sorry that I couldn’t meet you and wish you on your birthday.
+<h1 class="name-glow">Happy Birthday 🎊 Meri Jaan</h1>
+<b>Most Special Person In My Life ✨</b>
+
+<img src="https://png.pngtree.com/png-clipart/20250116/original/pngtree-colorful-birthday-cake-with-candles-and-confetti-png-image_20274111.png">
+<i>Riyoo, Hey, Beautiful 🌹💐 girl 👧 in the world🌎,first of all I’m really sorry that I couldn’t meet you and wish you on your birthday.
 I miss you so much.
 But please, always keep smiling—no tears in your eyes.
 May God always keep you happy, give you every happiness in life,
@@ -218,37 +230,48 @@ I wish you great success in everything you do,
 and may you never feel sad—ever. 💖🫂</i>
 <i> apaa hostel vich fights kita ne bhut jada  but pher v apa door nhi hoya kye var tu mera kol royi kde mai tera kol but still apa pher v ekhda c, apni friendship to sara MSB jealousy krda c mainu v jealosy hude c jado tu mera too elava kisa hor nu v bolani de c bhut enjoy kita apa bhut jada .</i>
 <i> But, main tenu thank u kehna for everything  specially tu mnu jinna sikha da nhi ta syd ajj v mai pehla aditi bnyi rehde te sara din kisa na kisa lyi roode rehde but thanks to you tu mainu ena strong kr deta thank u so much baby.</i>    
-<img  src = https://i.fbcd.co/products/original/fc929b87a67af7946d189507f30eb9ab1359b4f54af6fb0498915be7702a3d18.jpg>
-<img src = https://i.pinimg.com/originals/56/cc/4b/56cc4b83a3b29d97959db4e361eab426.jpg>
-<img src =https://www.desicomments.com/wp-content/uploads/2017/02/Tom-And-Jerry-Smiling.jpg>
+
+<i>
+Thank you for making me stronger and better.
+Because of you, I learned to stand for myself.
+Thank you for everything, my baby 💕
+</i>
+
+<img src="https://i.fbcd.co/products/original/fc929b87a67af7946d189507f30eb9ab1359b4f54af6fb0498915be7702a3d18.jpg">
+<img src="https://i.pinimg.com/originals/56/cc/4b/56cc4b83a3b29d97959db4e361eab426.jpg">
+<img src="https://www.desicomments.com/wp-content/uploads/2017/02/Tom-And-Jerry-Smiling.jpg">
 </div>
+
 <script>
-function nextPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+const pages=document.querySelectorAll('.page');
+let i=0;
+
+function go(n){
+  pages[i].classList.remove('active');
+  i=n;
+  pages[i].classList.add('active');
 }
 
-function showEnvelope() {
-    document.getElementById("envelope").style.display = "block";
+function showEnvelope(){
+  document.getElementById("envelope").style.display="block";
 }
 
-function openLetter() {
-    document.getElementById("letter").style.display = "block";
-    document.getElementById("envelope").style.display = "none";
+function openLetter(){
+  document.getElementById("letter").style.display="block";
+  document.getElementById("envelope").style.display="none";
 }
 
-/* Hearts */
-function createHeart() {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "💖";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.fontSize = (16 + Math.random() * 20) + "px";
-    h.style.animationDuration = (4 + Math.random() * 4) + "s";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 8000);
-}
-setInterval(createHeart, 350);
+/* Floating hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=16+Math.random()*20+"px";
+  h.style.animationDuration=5+Math.random()*3+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},450);
 </script>
 
 </body>
