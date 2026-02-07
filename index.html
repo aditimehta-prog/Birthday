@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂 My Bestie 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff5f9e, #ff0844);
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Pages */
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.page.active {
+    display: flex;
+    animation: fadeIn 0.8s ease;
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
+    padding: 35px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(255,0,120,0.6);
+}
+
+h1, h2, h3 {
+    text-shadow: 0 0 12px rgba(255,255,255,0.5);
+}
+
+p {
+    line-height: 1.7;
+}
+
+/* Buttons */
+button {
+    margin: 15px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff0844, #ff5f9e);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 0 20px rgba(255,0,120,0.6);
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+/* Inputs */
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 25px;
+    border: none;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Envelope */
+#envelope {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 30px;
+    background: #ff2f6d;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255,0,120,0.8);
+    animation: bounce 1.4s infinite;
+    z-index: 5;
+}
+
+/* Letter */
+#letter {
+    display: none;
+    position: fixed;
+    inset: 8%;
+    background: white;
+    color: #ff2f6d;
+    padding: 30px;
+    border-radius: 30px;
+    overflow-y: auto;
+    z-index: 10;
+    animation: zoomIn 0.8s ease;
+}
+
+#letter i {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+<div class="card">
+<h1>WELCOME 💖 MERA BACCHA 💖</h1>
+<h2>There is a Quiz ❔ for You</h2>
+<button onclick="nextPage('page2')">Let's start 💫</button>
+<h3>Best of luck 🤞</h3>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+<div class="card">
+<h1>Q1. Where did we first meet 🫂?</h1>
+<button onclick="nextPage('page3')">Hostel Room</button>
+<button onclick="nextPage('page3')">Evening Attendance</button>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+<div class="card">
+<h1>Q2. How many times we celebrated your birthday?</h1>
+<input type="number" placeholder="Enter count">
+<button onclick="nextPage('page4')">➡️</button>
+</div>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page">
+<div class="card">
+<h1>Q3. Which birthday you loved most?</h1>
+<input type="text" placeholder="Write from heart 💕">
+<h2>I have something special for you 😄</h2>
+<button onclick="nextPage('page5')">➡️</button>
+</div>
+</div>
+
+<!-- PAGE 5 -->
+<div id="page5" class="page">
+<div class="card">
+<h2>HEY, keep smiling 😊</h2>
+<p><i>Happy Birthday to my forever favorite person 💖</i></p>
+<p> You make life brighter just by being in it, and I’m so grateful for every laugh, every rant, and every
+            memory we’ve shared. May this year bring you endless joy, crazy adventures, and all the love you deserve.
+            Stay the amazing soul you are—because the world (and I) wouldn’t be the same without you. 🌟
+        </p>
+<p>Thank you for being part of my life 🌟</p>
+<button onclick="showEnvelope()">Open Your Gift 💌</button>
+</div>
+</div>
+
+<div id="envelope" onclick="openLetter()">THERE IS A SURPRISE 🎁</div>
+
+<div id="letter">
+<h1>Happy Birthday 🎊 Meri Jaan</h1>
+        <b> Most Special Person In My life✨</b>
+        <img src="https://png.pngtree.com/png-clipart/20250116/original/pngtree-colorful-birthday-cake-with-candles-and-confetti-png-image_20274111.png">
+            <i>Riyoo, first of all I’m really sorry that I couldn’t meet you and wish you on your birthday.
+I miss you so much.
+But please, always keep smiling—no tears in your eyes.
+May God always keep you happy, give you every happiness in life,
+and bless you with amazing friends.
+I wish you great success in everything you do,
+and may you never feel sad—ever. 💖🫂</i>
+<i> apaa hostel vich fights kita ne bhut jada  but pher v apa door nhi hoya kye var tu mera kol royi kde mai tera kol but still apa pher v ekhda c, apni friendship to sara MSB jealousy krda c mainu v jealosy hude c jado tu mera too elava kisa hor nu v bolani de c bhut enjoy kita apa bhut jada .</i>
+<i> But, main tenu thank u kehna for everything  specially tu mnu jinna sikha da nhi ta syd ajj v mai pehla aditi bnyi rehde te sara din kisa na kisa lyi roode rehde but thanks to you tu mainu ena strong kr deta thank u so much baby.</i>    
+<img  src = https://i.fbcd.co/products/original/fc929b87a67af7946d189507f30eb9ab1359b4f54af6fb0498915be7702a3d18.jpg>
+<img src = https://i.pinimg.com/originals/56/cc/4b/56cc4b83a3b29d97959db4e361eab426.jpg>
+<img src =https://www.desicomments.com/wp-content/uploads/2017/02/Tom-And-Jerry-Smiling.jpg>
+</div>
+<script>
+function nextPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function showEnvelope() {
+    document.getElementById("envelope").style.display = "block";
+}
+
+function openLetter() {
+    document.getElementById("letter").style.display = "block";
+    document.getElementById("envelope").style.display = "none";
+}
+
+/* Hearts */
+function createHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (16 + Math.random() * 20) + "px";
+    h.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 8000);
+}
+setInterval(createHeart, 350);
+</script>
+
+</body>
+</html>
